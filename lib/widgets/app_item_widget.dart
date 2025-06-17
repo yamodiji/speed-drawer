@@ -115,7 +115,7 @@ class _AppItemWidgetState extends State<AppItemWidget>
         isAntiAlias: true,
         errorBuilder: (context, error, stackTrace) {
           debugPrint('Icon error for ${widget.app.packageName}: $error');
-          return _buildFallbackIcon();
+          return _buildFallbackIcon(Provider.of<ThemeProvider>(context, listen: false));
         },
       );
     }

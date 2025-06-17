@@ -36,7 +36,7 @@ class ThemeProvider extends ChangeNotifier {
       iconTheme: IconThemeData(color: Colors.black87),
     ),
     scaffoldBackgroundColor: Colors.white.withOpacity(_backgroundOpacity),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppConstants.borderRadius),
@@ -80,7 +80,7 @@ class ThemeProvider extends ChangeNotifier {
       iconTheme: IconThemeData(color: Colors.white70),
     ),
     scaffoldBackgroundColor: Colors.black.withOpacity(_backgroundOpacity),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 4,
       color: Colors.grey[900],
       shape: RoundedRectangleBorder(

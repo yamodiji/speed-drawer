@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:installed_apps/installed_apps.dart';
-import 'package:installed_apps/app_info.dart' as installed_apps;
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fuzzy/fuzzy.dart';
 
