@@ -194,47 +194,8 @@ jobs:
         
     - name: Validate optimizations
       run: |
-        echo "Validating performance optimizations..."
-        
-        # Check if cache service exists
-        if [ ! -f "lib/services/cache_service.dart" ]; then
-          echo "❌ Cache service not found!"
-          exit 1
-        fi
-        
-        # Check if app loading service exists
-        if [ ! -f "lib/services/app_loading_service.dart" ]; then
-          echo "❌ App loading service not found!"
-          exit 1
-        fi
-        
-        # Check if optimized constants exist
-        if ! grep -q "preloadBatchSize" lib/utils/constants.dart; then
-          echo "❌ Performance constants not found!"
-          exit 1
-        fi
-        
-        echo "✅ All optimization files found"
-        
-        # Validate key performance features
-        echo "Validating performance features..."
-        
-        if ! grep -q "cacheAppList" lib/services/cache_service.dart; then
-          echo "❌ App list caching not implemented!"
-          exit 1
-        fi
-        
-        if ! grep -q "loadApps" lib/services/app_loading_service.dart; then
-          echo "❌ Optimized app loading not implemented!"
-          exit 1
-        fi
-        
-        if ! grep -q "_onAppBatchLoaded" lib/providers/app_provider.dart; then
-          echo "❌ Batch loading not implemented!"
-          exit 1
-        fi
-        
-        echo "✅ All performance features validated"
+        echo "🔍 Running comprehensive optimization validation..."
+        dart run verify_optimizations.dart
         
     - name: Build optimized APK
       run: |
