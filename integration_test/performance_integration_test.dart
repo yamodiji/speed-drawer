@@ -43,7 +43,7 @@ void main() {
       
       // Test optimized app loading (may not work in test environment)
       try {
-        final apps = await loadingService.loadApps(
+        await loadingService.loadApps(
         onBatchLoaded: (batchApps) {
           totalBatches++;
           totalApps += batchApps.length;
@@ -116,7 +116,7 @@ void main() {
       
       // Try to find the app provider in the widget tree
       try {
-        final providerWidget = tester.widget<ChangeNotifierProvider<AppProvider>>(
+        tester.widget<ChangeNotifierProvider<AppProvider>>(
           find.byType(ChangeNotifierProvider<AppProvider>)
         );
         appProvider = AppProvider(); // Create a new instance for testing

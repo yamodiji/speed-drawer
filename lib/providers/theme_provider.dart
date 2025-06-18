@@ -36,10 +36,10 @@ class ThemeProvider extends ChangeNotifier {
       iconTheme: IconThemeData(color: Colors.black87),
     ),
     scaffoldBackgroundColor: Colors.white.withOpacity(_backgroundOpacity),
-    cardTheme: CardThemeData(
+    cardTheme: const CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -83,8 +83,8 @@ class ThemeProvider extends ChangeNotifier {
     cardTheme: CardThemeData(
       elevation: 4,
       color: Colors.grey[900],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
