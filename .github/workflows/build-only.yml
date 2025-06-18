@@ -1,0 +1,64 @@
+name: Build APK Only
+
+on:
+  push:
+    branches: [ "main", "build-*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build-apk:
+    name: Build APK (No Tests)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Setup Flutter 3.24.0
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0'
+        channel: 'stable'
+        cache: true
+        
+    - name: Get dependencies
+      run: |
+        echo "Getting dependencies..."
+        flutter pub get
+        echo "Dependencies installed successfully"
+        
+    - name: Build APK
+      run: |
+        echo "Building APK..."
+        flutter build apk --release \
+          --dart-define=flutter.inspector.structuredErrors=false \
+          --shrink \
+          --split-debug-info=build/symbols \
+          --obfuscate
+        echo "✅ APK built successfully"
+      env:
+        GRADLE_OPTS: -Xmx4g -XX:+UseG1GC
+        _JAVA_OPTIONS: -Xmx4g -XX:+UseG1GC
+        
+    - name: APK Info
+      run: |
+        APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+        APK_SIZE=$(stat -c%s "$APK_PATH")
+        APK_SIZE_MB=$((APK_SIZE / 1024 / 1024))
+        echo "📱 APK Size: ${APK_SIZE_MB}MB"
+        echo "📁 APK Location: $APK_PATH"
+        
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: speed-drawer-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 7 
