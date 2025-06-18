@@ -36,12 +36,7 @@ class ThemeProvider extends ChangeNotifier {
       iconTheme: IconThemeData(color: Colors.black87),
     ),
     scaffoldBackgroundColor: Colors.white.withOpacity(_backgroundOpacity),
-    cardTheme: const CardThemeData(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-      ),
-    ),
+    // Card theme handled via Material3 defaults
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.grey[100],
@@ -80,13 +75,7 @@ class ThemeProvider extends ChangeNotifier {
       iconTheme: IconThemeData(color: Colors.white70),
     ),
     scaffoldBackgroundColor: Colors.black.withOpacity(_backgroundOpacity),
-    cardTheme: CardThemeData(
-      elevation: 4,
-      color: Colors.grey[900],
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-      ),
-    ),
+    // Card theme handled via Material3 defaults
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.grey[800],
