@@ -239,9 +239,13 @@ jobs:
     - name: Get dependencies
       run: flutter pub get
       
-    - name: Run integration tests
-      run: flutter test integration_test/
+    - name: Run integration tests (CI environment)
+      run: |
+        echo "Running integration tests in CI environment..."
+        flutter test integration_test/ --reporter=expanded
       continue-on-error: true
+      env:
+        CI: true
 
   release:
     name: Create Optimized Release
