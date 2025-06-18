@@ -96,12 +96,12 @@ class AppProvider extends ChangeNotifier {
         onBatchLoaded: _onAppBatchLoaded,
         onProgress: _onLoadingProgress,
       );
-      
+        
       if (apps.isNotEmpty) {
         _allApps = apps;
-        await _loadStoredAppData();
+      await _loadStoredAppData();
         _sortApps();
-        _initializeFuzzySearcher();
+      _initializeFuzzySearcher();
         _updateDerivedLists();
         _isInitialLoad = false;
       }
@@ -192,14 +192,14 @@ class AppProvider extends ChangeNotifier {
     if (_prefs == null) return;
     
     try {
-      // Save favorites
-      final favoritePackages = _allApps
-          .where((app) => app.isFavorite)
-          .map((app) => app.packageName)
-          .toList();
-      
+    // Save favorites
+    final favoritePackages = _allApps
+        .where((app) => app.isFavorite)
+        .map((app) => app.packageName)
+        .toList();
+    
       // Save usage data for frequently used apps only
-      final usageData = <String, dynamic>{};
+    final usageData = <String, dynamic>{};
       for (var app in _allApps.where((app) => app.launchCount > 0)) {
         usageData[app.packageName] = {
           'launchCount': app.launchCount,

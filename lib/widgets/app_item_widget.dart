@@ -211,16 +211,16 @@ class _AppItemWidgetState extends State<AppItemWidget>
                       SizedBox(
                         width: themeProvider.iconSize + 8,
                         child: Text(
-                          widget.app.displayName,
-                          style: TextStyle(
-                            color: themeProvider.getTextColor(context),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                        widget.app.displayName,
+                        style: TextStyle(
+                          color: themeProvider.getTextColor(context),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                             height: 1.2, // Better line height
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       
@@ -234,9 +234,9 @@ class _AppItemWidgetState extends State<AppItemWidget>
                             children: [
                               if (widget.app.isFavorite)
                                 Icon(
-                                  Icons.favorite,
+                            Icons.favorite,
                                   size: 10,
-                                  color: Colors.red.withOpacity(0.7),
+                            color: Colors.red.withOpacity(0.7),
                                 ),
                               if (widget.app.isFavorite && widget.app.launchCount > 5)
                                 const SizedBox(width: 2),

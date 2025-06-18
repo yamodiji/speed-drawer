@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   final FocusNode _searchFocusNode = FocusNode();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _hasTriedKeyboardAfterLoad = false;
+  Timer? _keyboardTimer;
+  Timer? _retryTimer;
 
   @override
   void initState() {
@@ -46,17 +49,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (settingsProvider.showKeyboard) {
       _searchFocusNode.requestFocus();
       
-      // Force keyboard to show with a slight delay
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (mounted && settingsProvider.showKeyboard) {
-          _searchFocusNode.requestFocus();
-          SystemChannels.textInput.invokeMethod('TextInput.show');
-        }
-      });
+      // Cancel existing timer
+      _keyboardTimer?.cancel();
       
-      // Additional attempt with longer delay
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (mounted && settingsProvider.showKeyboard && !_searchFocusNode.hasFocus) {
+      // Force keyboard to show with a slight delay
+      _keyboardTimer = Timer(const Duration(milliseconds: 100), () {
+        if (mounted && settingsProvider.showKeyboard) {
           _searchFocusNode.requestFocus();
           SystemChannels.textInput.invokeMethod('TextInput.show');
         }
@@ -69,19 +67,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (settingsProvider.showKeyboard && !_hasTriedKeyboardAfterLoad) {
       _hasTriedKeyboardAfterLoad = true;
       
+      // Cancel existing timer
+      _retryTimer?.cancel();
+      
       // Wait a bit after app loading completes, then try to show keyboard
-      Future.delayed(const Duration(milliseconds: 200), () {
+      _retryTimer = Timer(const Duration(milliseconds: 200), () {
         if (mounted && settingsProvider.showKeyboard) {
           _searchFocusNode.requestFocus();
           SystemChannels.textInput.invokeMethod('TextInput.show');
-          
-          // Final backup attempt
-          Future.delayed(const Duration(milliseconds: 500), () {
-            if (mounted && settingsProvider.showKeyboard && !_searchFocusNode.hasFocus) {
-              _searchFocusNode.requestFocus();
-              SystemChannels.textInput.invokeMethod('TextInput.show');
-            }
-          });
         }
       });
     }
@@ -90,6 +83,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _keyboardTimer?.cancel();
+    _retryTimer?.cancel();
     _searchController.dispose();
     _searchFocusNode.dispose();
     super.dispose();

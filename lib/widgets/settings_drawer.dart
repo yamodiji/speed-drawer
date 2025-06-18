@@ -41,12 +41,15 @@ class SettingsDrawer extends StatelessWidget {
                         size: 32,
                       ),
                       SizedBox(width: AppConstants.paddingMedium),
-                      Text(
-                        'Speed Drawer',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Flexible(
+                        child: Text(
+                          'Speed Drawer',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -357,18 +360,27 @@ class SettingsDrawer extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: themeProvider.getTextColor(context),
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  flex: 2,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: themeProvider.getTextColor(context),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text(
-                  valueLabel,
-                  style: TextStyle(
-                    color: themeProvider.getAccentColor(context),
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  flex: 1,
+                  child: Text(
+                    valueLabel,
+                    style: TextStyle(
+                      color: themeProvider.getAccentColor(context),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.end,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

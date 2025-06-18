@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:speed_drawer/models/app_info.dart';
 import 'package:speed_drawer/services/cache_service.dart';
@@ -5,6 +6,9 @@ import 'package:speed_drawer/services/app_loading_service.dart';
 import 'package:speed_drawer/utils/constants.dart';
 
 void main() {
+  // Initialize Flutter bindings for all tests
+  TestWidgetsFlutterBinding.ensureInitialized();
+  
   group('Performance Services Unit Tests', () {
     
     group('CacheService Tests', () {

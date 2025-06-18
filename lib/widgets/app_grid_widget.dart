@@ -90,7 +90,7 @@ class _AppGridWidgetState extends State<AppGridWidget>
               if (widget.apps.length > AppConstants.preloadBatchSize) 
                 SliverToBoxAdapter(
                   child: _buildLoadingIndicator(context),
-                ),
+              ),
               
               // Bottom padding
               const SliverToBoxAdapter(
